@@ -5,17 +5,64 @@
     <meta name="viewport" content="width=device-width">
     <title>COVID-19 Simulator</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
+      <!-- KaTex -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+    integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+  <!-- The loading of KaTeX is deferred to speed up page rendering -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+    integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous">
+
+    </script>
+  <!-- To automatically render math in text elements, include the auto-render extension: -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous" onload='renderMathInElement(document.body, options={
+            delimeters: [
+                {left: "$$", right: "$$" , display: true}, 
+                {left: "$" , right: "$" , display: false}, 
+                {left: "\\(" , right: "\\)" , display: false}, 
+                {left: "\\[" , right: "\\]" , display: true} 
+            ]
+        })'>
+
+  </script>
+
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
   </head>
   <body>
-    <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.js"></script>
-    <script src="p5.sound.js"></script>
     <script src="sketch.js"></script>
-
+    
+  
     <!--set up the canvas for the first simulation-->
-    <h1 id="title">COVID-19 Simulation</h1>
-    <div id="simulator-div"></div>
+    <div id="container">
+      <h1 id="title"><mark>Epidemic Simulation</mark></h1>
 
-    <p id="explanation">This is where the explanation will go...</p>
+      <div class="row">
+        <div class="column-sim">
+          <center> 
+            <div id="simulator-div"></div>
+          </center> 
+        </div>
+        <div class="column-expl">
+        <p id="explanation">This is a very basic simulation of an epidemic. We begin with <code>nb_ppl</code> infected people.</p> The people move at a random velocity until they enter <code>crit_dist</code> -- the distance needed to potentially get infected. We then sample from a \(\text{Ber}(p) \) distribution to determine if the person will get infected or not, where <code>p</code> is chosen by the user below.
+        <br>
+        <br>
+        <span id="totals">Total number of <mark>infected indviduals</mark>: </span>
+        <p id="select-option">Select the <mark>population size</mark>.</p>
+          <div class="slidecontainer">
+        <input type="range" min="0" max="40" value="9", id="popRange"></p>Selected population size: <span id="popValue"></span>
+        </div> 
+        <p>Now we need to determine the <mark>probability that one person infects someone else</mark>. Choose a value in \(  ]0, 1] \).</p>
+  
+        <div class="slidecontainer">
+          <input type="range" min="0" max="100" value="50", id="myRange"><p>Selected probability: <span id="value"></span>. 
+        </div>
+        <div>
+      </div>
+      <div class="explanation">
+      </div>
+    </div> 
   </body>
+
 </html>
